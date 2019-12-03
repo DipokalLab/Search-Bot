@@ -21,13 +21,13 @@ def header(ur):
     soup = BeautifulSoup(res.content, 'html.parser')
     title = soup.find('title')
     print(cleanhtml(str(title)))
-
-
+            
+            
 def serc(ur):
     res = requests.get(ur, headers=headers)
     soup = BeautifulSoup(res.content, 'html.parser')
     for link in soup.findAll("a"):
-        if 'href' in link.attrs:
+        if 'href' in link.attrs: 
             if 'http://' in link.attrs['href']:
                 print (link.attrs['href'])
                 header(link.attrs['href'])
@@ -37,7 +37,17 @@ def serc(ur):
             else:
                 print (ur+link.attrs['href'])
                 header(ur+link.attrs['href'])
+                
+            print ('================================')
 
-
-
-serc('https://getbootstrap.com/')
+                
+                
+# 2019-12-03: 사이트를 바탕으로 크롤링
+def search_deep():   
+    l = ['https://startbootstrap.com/', 'https://www.naver.com/', 'https://github.com/', 'https://www.facebook.com/', 'https://brilliant.org/']
+    for i in range(len(l)):
+        serc(l[i])
+        
+        
+        
+search_deep()
